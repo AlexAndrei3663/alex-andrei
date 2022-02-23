@@ -4,7 +4,7 @@ import '../App.css';
 export default function Questoes(props) {
     const [random, setRandom] = useState(Math.floor(Math.random() * props.questoes.length))
     const [questao, setQuestao] = useState(props.questoes[random])
-    const [resposta, setResposta] = useState()
+    const [exibir, setExibir] = useState(false)
 
     return(
         <div>
@@ -14,16 +14,12 @@ export default function Questoes(props) {
             <button onClick={() => {
                 setRandom(Math.floor(Math.random() * props.questoes.length))
                 setQuestao(props.questoes[random])
-                setResposta()       
-            }}>
-                Mudar pergunta
+                setExibir(false)       
+            }}>Mudar pergunta</button>
+            <button onClick={() => setExibir(!exibir)}>
+                {exibir?<>Ocultar</>:<>Mostrar</>} resposta
             </button>
-
-            <button onClick={() => setResposta(questao.resposta)}>
-                Mostrar resposta
-            </button>
-            
-            <p>{resposta}</p>
+            {exibir === true && <p>{questao.resposta}</p>}
         </div>
     )
 }
