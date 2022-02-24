@@ -10,6 +10,7 @@ export default function Home(props) {
                 <nav> <Link to="first-page/like"> Gosto </Link> </nav>
                 <nav> <Link to="first-page/nop"> Não </Link> </nav>
                 <nav> <Link to="first-page/joke"> Pavê ou pá cumê </Link> </nav>
+                <nav> <Link to="formulario"> Formulário </Link> </nav>
             </div>
         </>
     )

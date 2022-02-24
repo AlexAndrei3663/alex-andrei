@@ -3,6 +3,7 @@ import Home from './Home';
 import FirstPage from './FirstPage';
 import SecondPage from './SecondPage';
 import '../App.css';
+import Formulario from '../aulaForms/Formulario';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/first-page/:answer' element={<FirstPage />} />
         <Route path='/second-page' element={<SecondPage />} />
+        <Route path='/formulario' element={<Formulario />} />
       </Routes>
     </div>
   );
