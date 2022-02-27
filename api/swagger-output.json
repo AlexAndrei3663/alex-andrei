@@ -1,0 +1,172 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Minha API de Times",
+    "description": "Exemplo de API para o curso de React Native"
+  },
+  "host": "localhost:4000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Time",
+      "description": "Endpoints"
+    },
+    {
+      "name": "Questao",
+      "description": "Endpoints"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "apiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "X-API-KEY",
+      "description": "Descricao qualquer"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/times": {
+      "get": {
+        "tags": [
+          "Time"
+        ],
+        "description": "Endpoint listar os times cadastrados",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Time"
+        ],
+        "description": "Endpoint para cadastrar o time",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Informacoes do time",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Time"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/questao": {
+      "get": {
+        "tags": [
+          "Questao"
+        ],
+        "description": "Endpoint listar os questoes cadastradas",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Questao"
+        ],
+        "description": "Endpoint para cadastrar o time",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Informacoes da questoes",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Questao"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Time": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "string",
+          "example": "Flamengo"
+        },
+        "descricao": {
+          "type": "string",
+          "example": "Maior de todos"
+        }
+      }
+    },
+    "Questao": {
+      "type": "object",
+      "properties": {
+        "pergunta": {
+          "type": "string",
+          "example": "Palmeiras tem mundial?"
+        },
+        "resposta": {
+          "type": "string",
+          "example": "Óbvio que nao"
+        }
+      }
+    }
+  }
+}

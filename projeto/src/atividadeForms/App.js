@@ -1,5 +1,5 @@
 import '../App.css';
-import QuestoesForm from './QuestoesForm';
+import QuestoesForm from './components/QuestoesForm';
 
 function App() {
   return (

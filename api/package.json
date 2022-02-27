@@ -1,0 +1,33 @@
+{
+  "name": "exemplo-api",
+  "version": "1.0.0",
+  "description": "Exemplo simples de API em NodeJS.",
+  "main": "index.js",
+  "readmeFilename": "README.md",
+  "private": false,
+  "keywords": [
+    "swagger",
+    "autogen",
+    "example",
+    "router"
+  ],
+  "author": {
+    "name": "Nataniel paiva",
+    "email": "nataniel.paiva@gmail.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "start-gendoc": "node swagger.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "swagger-autogen": "^2.18.8",
+    "swagger-ui-express": "^4.1.4"
+  }
+}

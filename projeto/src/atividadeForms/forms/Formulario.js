@@ -1,8 +1,14 @@
 import { useForm } from "react-hook-form";
+import { submitService } from "../services/submitService";
 
 export default function Formulario(props) {
     const { register, handleSubmit } = useForm();
-    const onSubmit = data => {props.salvar(data)};
+    const onSubmit = async data => {
+        const response = await submitService(data)
+        if(response){
+            props.listItens()
+        }
+    };
 
     return(
         <>
