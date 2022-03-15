@@ -1,27 +1,43 @@
 import React, { useState } from 'react';
-import { View, FlatList, StyleSheet, Text, StatusBar, Alert, Button, Pressable } from 'react-native';
+import { View, StyleSheet, Text, Alert, Pressable } from 'react-native';
+import NumerosSorteados from './NumerosSorteados';
 
-// Falta criar um array para definir os números que já saíram
+// Gera um array com os valores do bingo
+let numerosBingo = [];
+for (let index = 1; index <= 60; index++) {
+  numerosBingo.push(index);
+}
 
 export default function Sorteio(props) {
-    const [sortedNUmber, setSortedNumber] = useState("Sortear Número");
+    const [currentNumber, setCurrentNumber] = useState("Sortear Número");
+    const [sortedNUmbers, setSortedNumbers] = useState([]);
 
-    onPressDraw = () => {
-        const random = Math.ceil(Math.random() * 60);
-        const valid = props.cartela.find(element => random===element.number);
-        if (valid != undefined){
-            Alert.alert("Seu número foi sorteado", "Número: " + random);
-            props.markNumber(valid.key);
+    const onPressDraw = () => {
+        if(numerosBingo.length<1){
+            Alert.alert("Sem números para sortear");
+            return;   
         }
-        setSortedNumber(String(random));
+        
+        const indexNumero = Math.floor(Math.random() * numerosBingo.length);
+
+        const valid = props.cartela.find(element => numerosBingo[indexNumero] === element.number);
+        if (valid != undefined) {
+            Alert.alert("Seu número foi sorteado", "Número: " + valid.number);
+            props.markNumber(props.cartela.indexOf(valid));
+        }
+        setCurrentNumber(String(numerosBingo[indexNumero]));
+
+        setSortedNumbers([...sortedNUmbers, numerosBingo.splice(indexNumero, 1)]);
+
+        
     };
 
     return (
-    <View style={styles.container}>
-        <Pressable style={styles.button} onPress={onPressDraw}>
-            <Text style={styles.text}>{sortedNUmber<10 ? "0"+String(sortedNUmber) : sortedNUmber}</Text>
-        </Pressable>
-    </View>
+        <View style={styles.container}>
+            <Pressable style={styles.button} onPress={onPressDraw}>
+                <Text style={styles.text}>{currentNumber < 10 ? "0" + String(currentNumber) : currentNumber}</Text>
+            </Pressable>
+        </View>
     );
 }
 
@@ -39,12 +55,12 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         elevation: 3,
         backgroundColor: '#191970',
-      },
-      text: {
+    },
+    text: {
         fontSize: 24,
         lineHeight: 32,
         fontWeight: 'bold',
         letterSpacing: 0.25,
         color: 'white',
-      },
+    },
 });

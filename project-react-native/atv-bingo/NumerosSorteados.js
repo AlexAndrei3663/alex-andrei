@@ -2,12 +2,12 @@ import React from 'react';
 import { View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
   
   const Item = ({ item }) => (
-    <View style={item.marked ? styles.marked_item : styles.item}>
-      <Text style={styles.number}>{item.number<10 ? "0" + String(item.number) : item.number}</Text>
+    <View style={styles.item}>
+      <Text style={styles.number}>{item.number<10 ? "0"+String(item.number) : item.number}</Text>
     </View>
   );
 
-export default function Cartela(props) {
+export default function NumerosSorteados(props) {
     const renderItem = ({ item }) => (
         <Item item={item} />
     );
@@ -15,9 +15,9 @@ export default function Cartela(props) {
     return (
     <View style={styles.container}>
         <FlatList
-        data={props.cartela}
+        data={props.numerosSorteados}
         renderItem={renderItem}
-        numColumns={3}
+        numColumns={5}
         />
     </View>
     );
@@ -25,7 +25,7 @@ export default function Cartela(props) {
 
 const styles = StyleSheet.create({
     container: {
-      flex: 0.6,
+      flex: 0.5,
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
@@ -37,14 +37,8 @@ const styles = StyleSheet.create({
         marginVertical: 8,
         marginHorizontal: 8,
     },
-    marked_item: {
-      backgroundColor: '#8B0000',
-      padding: 15,
-      marginVertical: 8,
-      marginHorizontal: 8,
-  },
     number: {
         color: '#fff',
-        fontSize: 32,
+        fontSize: 10,
     },
 });
