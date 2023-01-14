@@ -1,57 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { Alert, StyleSheet, Text, View } from 'react-native';
-import Cartela from './atv-bingo/Cartela';
-import Sorteio from './atv-bingo/Sorteio';
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { useState } from 'react'
+import { Provider as PaperProvider } from 'react-native-paper';
+import CarrinhoCompras from './atv-carrinho/CarrinhoCompras'
+import HomeScreen from './atv-carrinho/Home'
+import Produtos from './atv-carrinho/Produtos'
 
-let cartelaInicial = [];
-for (let index = 0; index < 15; index++) {
-  const random = 0;
-  const valid = undefined;
-  do {
-    random = Math.ceil(Math.random() * 60);
-    valid = cartelaInicial.find(element => random===element.number);
-  } while (valid != undefined);
-  cartelaInicial.push({
-    key: index,
-    number: random,
-    marked: false
-  });
-}
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [cartela, setCartela] = useState(cartelaInicial);
 
-  const markNumber = item => {
-    cartelaInicial[parseInt(item)].marked=true;
-    setCartela(cartelaInicial);
-    const bingo = cartela.find(element => element.marked===false);
-    if(bingo===undefined)
-      Alert.alert("BIMGO!!!!!", "Você Ganhou!!!!");
-  }
-  
+
+
+
   return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-      <Text style={styles.text}>BINGO!!!</Text>
-      <Cartela cartela={cartela} />
-      <Sorteio cartela={cartela} markNumber = {markNumber} />
-    </View>
-  );
+    <PaperProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={HomeScreen} />
+        </Stack.Navigator> 
+      </NavigationContainer>
+    </PaperProvider>
+  )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    fontSize: 42,
-    lineHeight: 42,
-    fontWeight: 'bold',
-    letterSpacing: 0.25,
-    color: 'black',
-  },
-});
